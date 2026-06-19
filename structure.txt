@@ -35,8 +35,12 @@ tradixa-frontend/src/lib/rbac/roles.types.ts
 tradixa-frontend/src/lib/utils/currency.ts
 tradixa-frontend/src/lib/utils/date.ts
 tradixa-frontend/src/lib/utils/sla.ts
+tradixa-frontend/src/lib/workflow/index.ts
 tradixa-frontend/src/lib/workflow/workflow.config.ts
+tradixa-frontend/src/lib/workflow/workflow.guards.ts
 tradixa-frontend/src/lib/workflow/workflow.permissions.ts
+tradixa-frontend/src/lib/workflow/workflow.routes.ts
+tradixa-frontend/src/lib/workflow/workflow.status.ts
 tradixa-frontend/src/lib/workflow/workflow.transitions.ts
 tradixa-frontend/src/lib/workflow/workflow.types.ts
 tradixa-frontend/tsconfig.json

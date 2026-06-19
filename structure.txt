@@ -30,8 +30,19 @@ tradixa-frontend/src/features/procurement-negotiation/config/procurement-module.
 tradixa-frontend/src/features/procurement-negotiation/config/procurement-navigation.config.ts
 tradixa-frontend/src/features/procurement-negotiation/hooks/index.ts
 tradixa-frontend/src/features/procurement-negotiation/index.ts
+tradixa-frontend/src/features/procurement-negotiation/mock/actors.mock.ts
 tradixa-frontend/src/features/procurement-negotiation/mock/index.ts
+tradixa-frontend/src/features/procurement-negotiation/mock/negotiations.mock.ts
+tradixa-frontend/src/features/procurement-negotiation/mock/po-drafts.mock.ts
+tradixa-frontend/src/features/procurement-negotiation/mock/price-comparisons.mock.ts
+tradixa-frontend/src/features/procurement-negotiation/mock/procurement-database.mock.ts
+tradixa-frontend/src/features/procurement-negotiation/mock/procurement-items.mock.ts
+tradixa-frontend/src/features/procurement-negotiation/mock/procurement-projections.mock.ts
+tradixa-frontend/src/features/procurement-negotiation/mock/spk.mock.ts
+tradixa-frontend/src/features/procurement-negotiation/mock/vendor-offers.mock.ts
+tradixa-frontend/src/features/procurement-negotiation/mock/vendors.mock.ts
 tradixa-frontend/src/features/procurement-negotiation/services/procurement-boundary.service.ts
+tradixa-frontend/src/features/procurement-negotiation/services/procurement-mock-repository.service.ts
 tradixa-frontend/src/features/procurement-negotiation/stores/index.ts
 tradixa-frontend/src/features/procurement-negotiation/types/index.ts
 tradixa-frontend/src/features/procurement-negotiation/types/negotiation.types.ts
@@ -41,6 +52,7 @@ tradixa-frontend/src/features/procurement-negotiation/types/procurement-common.t
 tradixa-frontend/src/features/procurement-negotiation/types/procurement-item.types.ts
 tradixa-frontend/src/features/procurement-negotiation/types/procurement-module.types.ts
 tradixa-frontend/src/features/procurement-negotiation/types/procurement-projection.types.ts
+tradixa-frontend/src/features/procurement-negotiation/types/procurement-repository.types.ts
 tradixa-frontend/src/features/procurement-negotiation/types/spk.types.ts
 tradixa-frontend/src/features/procurement-negotiation/types/vendor-offer.types.ts
 tradixa-frontend/src/features/procurement-negotiation/types/vendor.types.ts

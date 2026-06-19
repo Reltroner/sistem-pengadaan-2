@@ -1,10 +1,10 @@
-export const PROCUREMENT_MOCK_BOUNDARY = [
-  "spk.mock",
-  "vendors.mock",
-  "vendor-offers.mock",
-  "negotiations.mock",
-  "po-drafts.mock",
-  "procurement-activities.mock",
-] as const;
-
-export type ProcurementMockName = (typeof PROCUREMENT_MOCK_BOUNDARY)[number];
+export * from "./actors.mock";
+export * from "./negotiations.mock";
+export * from "./po-drafts.mock";
+export * from "./price-comparisons.mock";
+export * from "./procurement-database.mock";
+export * from "./procurement-items.mock";
+export * from "./procurement-projections.mock";
+export * from "./spk.mock";
+export * from "./vendor-offers.mock";
+export * from "./vendors.mock";

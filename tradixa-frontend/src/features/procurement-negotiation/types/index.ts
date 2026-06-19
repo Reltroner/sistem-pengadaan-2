@@ -5,6 +5,7 @@ export * from "./procurement-common.types";
 export * from "./procurement-item.types";
 export * from "./procurement-module.types";
 export * from "./procurement-projection.types";
+export * from "./procurement-repository.types";
 export * from "./spk.types";
 export * from "./vendor-offer.types";
 export * from "./vendor.types";

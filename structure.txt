@@ -23,6 +23,16 @@ tradixa-frontend/src/app/favicon.ico
 tradixa-frontend/src/app/globals.css
 tradixa-frontend/src/app/layout.tsx
 tradixa-frontend/src/app/page.tsx
+tradixa-frontend/src/features/procurement-negotiation/components/index.ts
+tradixa-frontend/src/features/procurement-negotiation/config/procurement-events.config.ts
+tradixa-frontend/src/features/procurement-negotiation/config/procurement-module.config.ts
+tradixa-frontend/src/features/procurement-negotiation/config/procurement-navigation.config.ts
+tradixa-frontend/src/features/procurement-negotiation/hooks/index.ts
+tradixa-frontend/src/features/procurement-negotiation/index.ts
+tradixa-frontend/src/features/procurement-negotiation/mock/index.ts
+tradixa-frontend/src/features/procurement-negotiation/services/procurement-boundary.service.ts
+tradixa-frontend/src/features/procurement-negotiation/stores/index.ts
+tradixa-frontend/src/features/procurement-negotiation/types/procurement-module.types.ts
 tradixa-frontend/src/lib/audit/audit.service.ts
 tradixa-frontend/src/lib/audit/audit.types.ts
 tradixa-frontend/src/lib/events/domain-events.types.ts

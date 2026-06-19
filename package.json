@@ -3,9 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm --prefix tradixa-frontend run dev",
-    "build": "npm --prefix tradixa-frontend run build",
-    "lint": "npm --prefix tradixa-frontend run lint",
+    "dev:frontend": "npm --prefix tradixa-frontend run dev",
+    "dev:backend": "npm --prefix tradixa-backend run dev",
+    "dev:all": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "build:frontend": "npm --prefix tradixa-frontend run build",
+    "build:backend": "npm --prefix tradixa-backend run build",
+    "build": "npm run build:backend && npm run build:frontend",
+    "lint:frontend": "npm --prefix tradixa-frontend run lint",
+    "lint:backend": "npm --prefix tradixa-backend run lint",
+    "lint": "npm run lint:backend && npm run lint:frontend",
     "start": "npm --prefix tradixa-frontend run start"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.3"
   }
 }

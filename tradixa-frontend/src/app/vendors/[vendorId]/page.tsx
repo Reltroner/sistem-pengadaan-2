@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getVendorById } from "@/features/procurement-negotiation/services";
+import { getVendorByIdData } from "@/features/procurement-negotiation/services/procurement-data-source.service";
 import { SectionCard } from "@/components/data-display/SectionCard";
 
 export default async function VendorDetailPage({
@@ -9,7 +9,7 @@ export default async function VendorDetailPage({
   params: Promise<{ vendorId: string }>;
 }) {
   const { vendorId } = await params;
-  const vendor = getVendorById(vendorId);
+  const vendor = await getVendorByIdData(vendorId);
 
   if (!vendor) {
     notFound();

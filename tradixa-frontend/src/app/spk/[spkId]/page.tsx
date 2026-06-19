@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getSPKById } from "@/features/procurement-negotiation/services";
+import { getSPKByIdData } from "@/features/procurement-negotiation/services/procurement-data-source.service";
 import { SPKSummaryCard } from "@/features/procurement-negotiation/components/SPKSummaryCard";
 import { SectionCard } from "@/components/data-display/SectionCard";
 import Link from "next/link";
@@ -10,7 +10,7 @@ export default async function SPKDetailPage({
   params: Promise<{ spkId: string }>;
 }) {
   const { spkId } = await params;
-  const spk = getSPKById(spkId);
+  const spk = await getSPKByIdData(spkId);
 
   if (!spk) {
     notFound();

@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { mockNegotiationSessions } from "@/features/procurement-negotiation/mock";
-import { getSPKById } from "@/features/procurement-negotiation/services";
+import { getNegotiationsData, getSPKByIdData } from "@/features/procurement-negotiation/services/procurement-data-source.service";
 import { StatusBadge } from "@/components/data-display/StatusBadge";
 import { formatCurrencyIDR } from "@/lib/utils/currency";
 
-export default function NegotiationsListPage() {
-  const negotiations = mockNegotiationSessions;
+export default async function NegotiationsListPage() {
+  const negotiations = await getNegotiationsData();
+  const spks = await Promise.all(negotiations.map(n => getSPKByIdData(n.spkId)));
+  const getSpk = (id: string) => spks.find(s => s?.id === id);
 
   return (
     <div className="max-w-7xl mx-auto space-y-6">
@@ -32,7 +33,7 @@ export default function NegotiationsListPage() {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {negotiations.map((neg) => {
-                const spk = getSPKById(neg.spkId);
+                const spk = getSpk(neg.spkId);
                 return (
                   <tr key={neg.id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4">

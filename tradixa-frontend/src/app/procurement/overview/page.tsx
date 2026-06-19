@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { getProcurementDashboardSummaryWithLimitedActivities } from "@/features/procurement-negotiation/services";
+import { getProcurementOverviewData } from "@/features/procurement-negotiation/services/procurement-data-source.service";
 import { StatCard } from "@/components/data-display/StatCard";
 import { SectionCard } from "@/components/data-display/SectionCard";
 
-export default function ProcurementOverviewPage() {
-  const summaryData = getProcurementDashboardSummaryWithLimitedActivities(5);
+export default async function ProcurementOverviewPage() {
+  const summaryData = await getProcurementOverviewData();
 
   return (
     <div className="max-w-6xl mx-auto space-y-6">

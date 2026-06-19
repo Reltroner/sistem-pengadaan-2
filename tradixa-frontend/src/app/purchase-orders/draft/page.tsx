@@ -1,10 +1,13 @@
-import { mockPODrafts } from "@/features/procurement-negotiation/mock";
-import { getVendorById, getSPKById } from "@/features/procurement-negotiation/services";
+import { getPODraftsData, getVendorByIdData, getSPKByIdData } from "@/features/procurement-negotiation/services/procurement-data-source.service";
 import { SectionCard } from "@/components/data-display/SectionCard";
 import { formatCurrencyIDR } from "@/lib/utils/currency";
 
-export default function PODraftsPage() {
-  const drafts = mockPODrafts;
+export default async function PODraftsPage() {
+  const drafts = await getPODraftsData();
+  const spks = await Promise.all(drafts.map(d => getSPKByIdData(d.spkId)));
+  const getSpk = (id: string) => spks.find(s => s?.id === id);
+  const vendors = await Promise.all(drafts.map(d => getVendorByIdData(d.selectedVendorId)));
+  const getVendor = (id: string) => vendors.find(v => v?.id === id);
 
   return (
     <div className="max-w-6xl mx-auto space-y-8">
@@ -33,8 +36,8 @@ export default function PODraftsPage() {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {drafts.map((draft) => {
-                const vendor = getVendorById(draft.selectedVendorId);
-                const spk = getSPKById(draft.spkId);
+                const vendor = getVendor(draft.selectedVendorId);
+                const spk = getSpk(draft.spkId);
                 return (
                   <tr key={draft.id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">

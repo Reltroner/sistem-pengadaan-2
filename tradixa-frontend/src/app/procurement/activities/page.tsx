@@ -1,8 +1,8 @@
-import { getRecentProcurementActivities } from "@/features/procurement-negotiation/services";
+import { getProcurementActivitiesData } from "@/features/procurement-negotiation/services/procurement-data-source.service";
 import { SectionCard } from "@/components/data-display/SectionCard";
 
-export default function ProcurementActivitiesPage() {
-  const activities = getRecentProcurementActivities(50); // Get more for the dedicated page
+export default async function ActivitiesPage() {
+  const activities = await getProcurementActivitiesData(); // Get more for the dedicated page
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">

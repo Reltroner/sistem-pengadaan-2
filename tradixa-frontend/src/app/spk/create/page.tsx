@@ -2,13 +2,39 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { createSPKData } from "@/features/procurement-negotiation/services/procurement-data-source.service";
 
 export default function SPKCreatePage() {
+  const router = useRouter();
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    setIsSubmitting(true);
+    
+    const formData = new FormData(e.currentTarget);
+    const payload = {
+      title: formData.get("title") as string,
+      sourceType: formData.get("sourceType") as string,
+      priority: formData.get("priority") as string,
+      customerName: formData.get("customerName") as string,
+      projectName: formData.get("projectName") as string,
+      requestedBy: formData.get("requestedBy") as string,
+      expectedDeliveryDate: formData.get("expectedDeliveryDate") as string || undefined,
+      notes: formData.get("notes") as string,
+    };
+
+    try {
+      await createSPKData(payload);
+      setIsSubmitted(true);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to create SPK");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSubmitted) {
@@ -17,7 +43,7 @@ export default function SPKCreatePage() {
         <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">✓</div>
         <h2 className="text-2xl font-bold text-gray-900 mb-2">SPK Successfully Drafted</h2>
         <p className="text-gray-500 mb-8">
-          The SPK prototype has been &quot;saved&quot;. This is a frontend prototype only, no data was persisted to the backend.
+          The SPK has been successfully created and saved to the backend. You can now view it in the SPK List.
         </p>
         <div className="flex gap-4 justify-center">
           <Link href="/spk/list" className="px-4 py-2 bg-white border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50">
@@ -45,12 +71,12 @@ export default function SPKCreatePage() {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div className="sm:col-span-2">
               <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">SPK Title</label>
-              <input type="text" id="title" required className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm" placeholder="e.g. Pengadaan Server Infrastruktur 2024" />
+              <input type="text" id="title" name="title" required className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm" placeholder="e.g. Pengadaan Server Infrastruktur 2024" />
             </div>
 
             <div>
               <label htmlFor="sourceType" className="block text-sm font-medium text-gray-700 mb-1">Source Type</label>
-              <select id="sourceType" className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bg-white">
+              <select id="sourceType" name="sourceType" className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bg-white">
                 <option value="CUSTOMER_REQUEST">Customer Request</option>
                 <option value="SALES_OPPORTUNITY">Sales Opportunity</option>
                 <option value="INTERNAL_PROJECT">Internal Project</option>
@@ -59,7 +85,7 @@ export default function SPKCreatePage() {
 
             <div>
               <label htmlFor="priority" className="block text-sm font-medium text-gray-700 mb-1">Priority</label>
-              <select id="priority" className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bg-white">
+              <select id="priority" name="priority" className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bg-white">
                 <option value="NORMAL">NORMAL</option>
                 <option value="LOW">LOW</option>
                 <option value="HIGH">HIGH</option>
@@ -69,27 +95,27 @@ export default function SPKCreatePage() {
 
             <div>
               <label htmlFor="customerName" className="block text-sm font-medium text-gray-700 mb-1">Customer Name</label>
-              <input type="text" id="customerName" required className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm" />
+              <input type="text" id="customerName" name="customerName" required className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm" />
             </div>
 
             <div>
               <label htmlFor="projectName" className="block text-sm font-medium text-gray-700 mb-1">Project Name</label>
-              <input type="text" id="projectName" required className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm" />
+              <input type="text" id="projectName" name="projectName" required className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm" />
             </div>
 
             <div>
               <label htmlFor="requestedBy" className="block text-sm font-medium text-gray-700 mb-1">Requested By</label>
-              <input type="text" id="requestedBy" required className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm" />
+              <input type="text" id="requestedBy" name="requestedBy" required className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm" />
             </div>
 
             <div>
               <label htmlFor="expectedDeliveryDate" className="block text-sm font-medium text-gray-700 mb-1">Expected Delivery Date</label>
-              <input type="date" id="expectedDeliveryDate" className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm" />
+              <input type="date" id="expectedDeliveryDate" name="expectedDeliveryDate" className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm" />
             </div>
 
             <div className="sm:col-span-2">
               <label htmlFor="notes" className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
-              <textarea id="notes" rows={4} className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm"></textarea>
+              <textarea id="notes" name="notes" rows={4} className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm"></textarea>
             </div>
           </div>
         </div>
@@ -97,8 +123,8 @@ export default function SPKCreatePage() {
           <Link href="/spk/list" className="px-4 py-2 bg-white border border-gray-300 text-gray-700 text-sm font-medium rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
             Cancel
           </Link>
-          <button type="submit" className="px-4 py-2 bg-blue-600 border border-transparent text-white text-sm font-medium rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-            Save Draft
+          <button type="submit" disabled={isSubmitting} className="px-4 py-2 bg-blue-600 border border-transparent text-white text-sm font-medium rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50">
+            {isSubmitting ? "Saving..." : "Save Draft"}
           </button>
         </div>
       </form>

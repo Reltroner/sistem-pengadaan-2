@@ -1,17 +1,9 @@
 import Link from "next/link";
-import { getSPKRecords } from "@/features/procurement-negotiation/services";
+import { getProcurementPipelineData } from "@/features/procurement-negotiation/services/procurement-data-source.service";
 import { PriorityBadge } from "@/components/data-display/PriorityBadge";
 
-export default function ProcurementPipelinePage() {
-  const allSpks = getSPKRecords();
-
-  const stages = [
-    { id: "INTAKE", label: "Intake & Preparation" },
-    { id: "NEGOTIATION", label: "Vendor Negotiation" },
-    { id: "REVIEW", label: "Manager Review" },
-    { id: "EXECUTION", label: "PO Execution" },
-    { id: "COMPLETE", label: "Done" },
-  ];
+export default async function PipelinePage() {
+  const pipelineStages = await getProcurementPipelineData();
 
   return (
     <div className="h-full flex flex-col">
@@ -22,18 +14,18 @@ export default function ProcurementPipelinePage() {
 
       <div className="flex-1 overflow-x-auto pb-4">
         <div className="flex h-full gap-6 px-1 min-w-max">
-          {stages.map((stage) => {
-            const stageSpks = allSpks.filter((spk) => spk.workflow.stage === stage.id);
+          {pipelineStages.map((stage) => {
+            const stageSpks = stage.items;
             return (
-              <div key={stage.id} className="w-80 flex flex-col bg-gray-100 rounded-xl max-h-full">
+              <div key={stage.stageId} className="w-80 flex flex-col bg-gray-100 rounded-xl max-h-full">
                 <div className="p-4 flex items-center justify-between shrink-0">
-                  <h3 className="font-semibold text-gray-700 text-sm">{stage.label}</h3>
+                  <h3 className="font-semibold text-gray-700 text-sm">{stage.title}</h3>
                   <span className="bg-gray-200 text-gray-600 text-xs font-medium px-2 py-0.5 rounded-full">
                     {stageSpks.length}
                   </span>
                 </div>
                 <div className="flex-1 overflow-y-auto px-4 pb-4 space-y-3">
-                  {stageSpks.map((spk) => (
+                  {stageSpks.map((spk: import("@/features/procurement-negotiation/types").SPKRecord) => (
                     <Link
                       key={spk.id}
                       href={`/spk/${spk.id}`}

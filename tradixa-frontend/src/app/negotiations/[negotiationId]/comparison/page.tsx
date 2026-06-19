@@ -1,9 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { mockPriceComparisonMatrices } from "@/features/procurement-negotiation/mock";
+import { getNegotiationByIdData, getSPKByIdData, getPriceComparisonData } from "@/features/procurement-negotiation/services/procurement-data-source.service";
 import { VendorComparisonTable } from "@/components/workflow/VendorComparisonTable";
-import { getSPKById } from "@/features/procurement-negotiation/services";
-import { mockNegotiationSessions } from "@/features/procurement-negotiation/mock";
 
 export default async function VendorComparisonPage({
   params,
@@ -11,14 +9,13 @@ export default async function VendorComparisonPage({
   params: Promise<{ negotiationId: string }>;
 }) {
   const { negotiationId } = await params;
-  const matrix = mockPriceComparisonMatrices.find((m) => m.negotiationId === negotiationId);
-  const negotiation = mockNegotiationSessions.find((n) => n.id === negotiationId);
-
-  if (!matrix || !negotiation) {
+  const negotiation = await getNegotiationByIdData(negotiationId);
+  const spk = negotiation ? await getSPKByIdData(negotiation.spkId) : null;
+  const matrix = negotiation ? await getPriceComparisonData(negotiationId) : null;
+  
+  if (!negotiation || !spk || !matrix) {
     notFound();
   }
-
-  const spk = getSPKById(negotiation.spkId);
 
   return (
     <div className="max-w-7xl mx-auto space-y-6">

@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { mockNegotiationSessions, mockNegotiationNotes } from "@/features/procurement-negotiation/mock";
-import { getSPKById } from "@/features/procurement-negotiation/services";
+import { getNegotiationByIdData, getSPKByIdData, getNegotiationNotesData } from "@/features/procurement-negotiation/services/procurement-data-source.service";
 import { StatusBadge } from "@/components/data-display/StatusBadge";
 import { SectionCard } from "@/components/data-display/SectionCard";
 import { formatCurrencyIDR } from "@/lib/utils/currency";
@@ -12,14 +11,14 @@ export default async function NegotiationDetailPage({
   params: Promise<{ negotiationId: string }>;
 }) {
   const { negotiationId } = await params;
-  const negotiation = mockNegotiationSessions.find((n) => n.id === negotiationId);
+  const negotiation = await getNegotiationByIdData(negotiationId);
 
   if (!negotiation) {
     notFound();
   }
 
-  const spk = getSPKById(negotiation.spkId);
-  const notes = mockNegotiationNotes.filter((n) => n.negotiationId === negotiationId);
+  const spk = await getSPKByIdData(negotiation.spkId);
+  const notes = await getNegotiationNotesData(negotiationId);
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">

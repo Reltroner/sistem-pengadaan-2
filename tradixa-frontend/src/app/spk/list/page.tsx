@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { getSPKRecords } from "@/features/procurement-negotiation/services";
+import { getSPKRecordsData } from "@/features/procurement-negotiation/services/procurement-data-source.service";
 import { StatusBadge } from "@/components/data-display/StatusBadge";
 import { PriorityBadge } from "@/components/data-display/PriorityBadge";
 import { WorkflowStageBadge } from "@/components/workflow/WorkflowStageBadge";
 
-export default function SPKListPage() {
-  const spkList = getSPKRecords();
+export default async function SPKListPage() {
+  const spkList = await getSPKRecordsData();
 
   return (
     <div className="max-w-7xl mx-auto space-y-6">

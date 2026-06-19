@@ -3,6 +3,7 @@ _backup_before_scaffold_20260619_191443/package-lock.json
 docs/architecture-contract.md
 docs/m1-procurement-negotiation-boundary.md
 docs/phase-1-roadmap.md
+package.json
 structure.txt
 tradixa-frontend/.gitignore
 tradixa-frontend/AGENTS.md
@@ -32,7 +33,17 @@ tradixa-frontend/src/features/procurement-negotiation/index.ts
 tradixa-frontend/src/features/procurement-negotiation/mock/index.ts
 tradixa-frontend/src/features/procurement-negotiation/services/procurement-boundary.service.ts
 tradixa-frontend/src/features/procurement-negotiation/stores/index.ts
+tradixa-frontend/src/features/procurement-negotiation/types/index.ts
+tradixa-frontend/src/features/procurement-negotiation/types/negotiation.types.ts
+tradixa-frontend/src/features/procurement-negotiation/types/po-draft.types.ts
+tradixa-frontend/src/features/procurement-negotiation/types/price-comparison.types.ts
+tradixa-frontend/src/features/procurement-negotiation/types/procurement-common.types.ts
+tradixa-frontend/src/features/procurement-negotiation/types/procurement-item.types.ts
 tradixa-frontend/src/features/procurement-negotiation/types/procurement-module.types.ts
+tradixa-frontend/src/features/procurement-negotiation/types/procurement-projection.types.ts
+tradixa-frontend/src/features/procurement-negotiation/types/spk.types.ts
+tradixa-frontend/src/features/procurement-negotiation/types/vendor-offer.types.ts
+tradixa-frontend/src/features/procurement-negotiation/types/vendor.types.ts
 tradixa-frontend/src/lib/audit/audit.service.ts
 tradixa-frontend/src/lib/audit/audit.types.ts
 tradixa-frontend/src/lib/events/domain-events.types.ts

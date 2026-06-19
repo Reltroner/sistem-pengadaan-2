@@ -1,0 +1,11 @@
+{
+  "name": "sistem-pengadaan2",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix tradixa-frontend run dev",
+    "build": "npm --prefix tradixa-frontend run build",
+    "lint": "npm --prefix tradixa-frontend run lint",
+    "start": "npm --prefix tradixa-frontend run start"
+  }
+}
